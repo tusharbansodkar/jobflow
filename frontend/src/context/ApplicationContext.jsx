@@ -11,12 +11,12 @@ const ApplicationProvider = ({ children }) => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/applications")
+      .get("https://jobflow-8bka.onrender.com/applications")
       .then((response) => {
         setApplications(response.data.applications);
       })
       .catch((error) => console.log(error));
-  }, []);
+  }, [applications]);
 
   const addApplication = (applicationData) => {
     const newApplication = {
@@ -39,6 +39,12 @@ const ApplicationProvider = ({ children }) => {
   };
 
   const updateApplication = async (applicationId, updates) => {
+    // const response = await axios.put(
+    //   `https://jobflow-8bka.onrender.com/applications/update/${applicationId}`,
+    //   updates,
+    // );
+
+    console.log(response);
     setApplications((currentApplications) =>
       currentApplications.map((application) =>
         application.id === applicationId
