@@ -1,12 +1,22 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import { mockApplications } from "../data/mockApplications";
+import axios from "axios";
 
 const ApplicationContext = createContext(null);
 
 const ApplicationProvider = ({ children }) => {
-  const [applications, setApplications] = useState(mockApplications);
+  const [applications, setApplications] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:5000/applications")
+      .then((response) => {
+        setApplications(response.data.applications);
+      })
+      .catch((error) => console.log(error));
+  }, []);
 
   const addApplication = (applicationData) => {
     const newApplication = {
@@ -28,7 +38,7 @@ const ApplicationProvider = ({ children }) => {
     setApplications(updatedApplications);
   };
 
-  const updateApplication = (applicationId, updates) => {
+  const updateApplication = async (applicationId, updates) => {
     setApplications((currentApplications) =>
       currentApplications.map((application) =>
         application.id === applicationId

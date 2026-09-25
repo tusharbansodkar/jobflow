@@ -25,7 +25,7 @@ const Applications = () => {
   const [sortOption, setSortOption] = useState("newest");
 
   const selectedApplication = applications.find(
-    (application) => application.id === selectedApplicationId,
+    (application) => application._id === selectedApplicationId,
   );
 
   const filteredApplications = applications
@@ -63,7 +63,7 @@ const Applications = () => {
     });
 
   const handleApplicationClick = (application) => {
-    setSelectedApplicationId(application.id);
+    setSelectedApplicationId(application._id);
   };
 
   const handleStatusChange = (applicationId, newStatus) => {
@@ -98,7 +98,7 @@ const Applications = () => {
 
   const handleApplicationSubmit = (formData) => {
     if (editingApplication) {
-      updateApplication(editingApplication.id, formData);
+      updateApplication(editingApplication._id, formData);
     } else {
       addApplication(formData);
     }
