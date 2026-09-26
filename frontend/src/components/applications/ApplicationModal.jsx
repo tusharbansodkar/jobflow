@@ -63,7 +63,10 @@ const ApplicationModal = ({ isOpen, application, onClose, onSubmit }) => {
       <button
         className="absolute inset-0 bg-black/30 "
         aria-label="Close Modal"
-        onClick={onClose}
+        onClick={() => {
+          onClose(false);
+          setFormData(EMPTY_FORM);
+        }}
       ></button>
 
       {/* Modal */}

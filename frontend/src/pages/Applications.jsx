@@ -156,7 +156,7 @@ const Applications = () => {
       <ApplicationModal
         isOpen={isModalOpen}
         application={selectedApplication}
-        onClose={() => setIsModalOpen(false)}
+        onClose={setIsModalOpen}
         onSubmit={handleApplicationSubmit}
       />
     </section>
