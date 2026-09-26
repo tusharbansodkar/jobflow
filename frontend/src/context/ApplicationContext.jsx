@@ -42,7 +42,6 @@ const ApplicationProvider = ({ children }) => {
 
       const deletedApplication = response.data.deletedApplication;
 
-      console.log(response.data);
       setApplications((currentApplications) =>
         currentApplications.filter(
           (application) => application._id !== deletedApplication._id,
