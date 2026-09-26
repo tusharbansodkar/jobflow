@@ -1,5 +1,4 @@
 import { createContext, useEffect, useState } from "react";
-import { mockApplications } from "../data/mockApplications";
 import axios from "axios";
 
 const ApplicationContext = createContext(null);
@@ -16,18 +15,32 @@ const ApplicationProvider = ({ children }) => {
         setApplications(response.data.applications);
       })
       .catch((error) => console.log(error));
-  }, [applications]);
+  }, []);
 
-  const addApplication = (applicationData) => {
-    const newApplication = {
-      id: crypto.randomUUID(),
-      ...applicationData,
-    };
+  const addApplication = async (applicationData) => {
+    try {
+      const response = await axios.post(
+        "https://jobflow-8bka.onrender.com/applications/add",
+        applicationData,
+      );
 
-    setApplications((currentApplications) => [
-      newApplication,
-      ...currentApplications,
-    ]);
+      const newApplication = response.data.application;
+
+      setApplications([...applications, newApplication]);
+
+      console.log(response.data.message);
+    } catch (error) {
+      console.log("Failed to update application", error);
+    }
+
+    // const newApplication = {
+    //   id: crypto.randomUUID(),
+    //   ...applicationData,
+    // };
+    // setApplications((currentApplications) => [
+    //   newApplication,
+    //   ...currentApplications,
+    // ]);
   };
 
   const deleteApplication = (applicationId) => {
@@ -39,19 +52,24 @@ const ApplicationProvider = ({ children }) => {
   };
 
   const updateApplication = async (applicationId, updates) => {
-    // const response = await axios.put(
-    //   `https://jobflow-8bka.onrender.com/applications/update/${applicationId}`,
-    //   updates,
-    // );
+    try {
+      const response = await axios.put(
+        `https://jobflow-8bka.onrender.com/applications/update/${applicationId}`,
+        updates,
+      );
 
-    console.log(response);
-    setApplications((currentApplications) =>
-      currentApplications.map((application) =>
-        application.id === applicationId
-          ? { ...application, ...updates }
-          : application,
-      ),
-    );
+      const updatedApplication = response.data.application;
+
+      setApplications((currentApplications) =>
+        currentApplications.map((application) =>
+          (application._id ?? application.id) === applicationId
+            ? { ...application, ...updatedApplication }
+            : application,
+        ),
+      );
+    } catch (error) {
+      console.error("Failed to update application:", error);
+    }
   };
 
   const updateApplicationStatus = (applicationId, newStatus) => {

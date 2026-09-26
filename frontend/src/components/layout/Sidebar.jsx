@@ -32,7 +32,7 @@ const Sidebar = ({ isSidebarOpen, onToggle }) => {
         <div className="flex flex-col h-screen">
           {/* Brand */}
 
-          <div className="flex h-16 items-center justify-center border-b border-border">
+          <div className="flex h-16 items-center justify-center border-b border-border-strong">
             <span className="text-xl font-semibold tracking-tight text-primary">
               JobFlow
             </span>

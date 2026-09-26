@@ -12,7 +12,7 @@ const Header = ({ isSidebarOpen, onToggle }) => {
 
   return (
     <>
-      <header className="sticky top-0 z-10 border-b border-border-strong bg-surface">
+      <header className="border-b border-border-strong bg-surface">
         <div className="flex h-16 items-center justify-between lg:justify-end gap-4 px-4 sm:px-6 lg:px-8">
           <button
             className="lg:hidden p-2 hover:bg-primary-subtle text-primary cursor-pointer rounded-sm"
