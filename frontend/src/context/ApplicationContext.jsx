@@ -34,12 +34,23 @@ const ApplicationProvider = ({ children }) => {
     }
   };
 
-  const deleteApplication = (applicationId) => {
-    const updatedApplications = applications.filter(
-      (application) => application.id !== applicationId,
-    );
+  const deleteApplication = async (applicationId) => {
+    try {
+      const response = await axios.delete(
+        `https://jobflow-8bka.onrender.com/applications/delete/${applicationId}`,
+      );
 
-    setApplications(updatedApplications);
+      const deletedApplication = response.data.deletedApplication;
+
+      console.log(response.data);
+      setApplications((currentApplications) =>
+        currentApplications.filter(
+          (application) => application._id !== deletedApplication._id,
+        ),
+      );
+    } catch (error) {
+      console.log("Failed to delete application.", error);
+    }
   };
 
   const updateApplication = async (applicationId, updates) => {
