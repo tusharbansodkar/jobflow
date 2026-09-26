@@ -7,7 +7,6 @@ const Header = ({ isSidebarOpen, onToggle }) => {
 
   const handleApplicationSubmit = (formData) => {
     addApplication(formData);
-    setIsModalOpen(false);
   };
 
   return (
