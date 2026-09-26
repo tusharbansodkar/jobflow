@@ -53,16 +53,32 @@ const Dashboard = () => {
         <StatCard title="Offers" value={offerCount} type="offer" />
       </div>
 
-      {/* Application pipeline */}
+      {!totalApplications ? (
+        <div className="flex min-h-64 items-center justify-center rounded-lg border border-border bg-surface">
+          <div className="text-center">
+            <p className="text-sm font-medium text-text-primary">
+              No applications found
+            </p>
 
-      <ApplicationPipeline applications={applications} />
+            <p className="mt-1 text-sm text-text-muted">
+              Add application and start tracking.
+            </p>
+          </div>
+        </div>
+      ) : (
+        <>
+          {/* Application pipeline */}
 
-      {/* Recent + Insights */}
-      <div className="grid grid-cols-1 gap-6 lg:grid-cols-[1.5fr_1fr]">
-        <RecentApplications applications={applications} />
+          <ApplicationPipeline applications={applications} />
 
-        <JobSearchInsights applications={applications} />
-      </div>
+          {/* Recent + Insights */}
+          <div className="grid grid-cols-1 gap-6 lg:grid-cols-[1.5fr_1fr]">
+            <RecentApplications applications={applications} />
+
+            <JobSearchInsights applications={applications} />
+          </div>
+        </>
+      )}
     </section>
   );
 };
