@@ -3,6 +3,7 @@ import { ApplicationProvider } from "./context/ApplicationContext";
 import AppShell from "./layouts/AppShell";
 import Dashboard from "./pages/Dashboard";
 import Applications from "./pages/Applications";
+import { ToastContainer } from "react-toastify";
 
 const App = () => {
   return (
@@ -17,6 +18,7 @@ const App = () => {
 
           <Route path="*" element={<Navigate to="/dashboard" replace />} />
         </Routes>
+        <ToastContainer />
       </ApplicationProvider>
     </BrowserRouter>
   );

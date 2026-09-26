@@ -1,4 +1,5 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useEffect, useRef, useState } from "react";
+import { showToast } from "../utils/toast";
 import axios from "axios";
 
 const ApplicationContext = createContext(null);
@@ -7,6 +8,7 @@ const ApplicationProvider = ({ children }) => {
   const [applications, setApplications] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const toastId = useRef(null);
 
   useEffect(() => {
     axios
@@ -19,41 +21,52 @@ const ApplicationProvider = ({ children }) => {
 
   const addApplication = async (applicationData) => {
     try {
+      toastId.current = showToast.loading("Saving application...");
+
       const response = await axios.post(
         "https://jobflow-8bka.onrender.com/applications/add",
         applicationData,
       );
 
       const newApplication = response.data.application;
-
       setApplications([...applications, newApplication]);
 
-      console.log(response.data.message);
+      setIsModalOpen(false);
+
+      showToast.success(toastId.current, response.data.message);
     } catch (error) {
-      console.log("Failed to update application", error);
+      console.log("Failed to update application.", error);
+
+      showToast.error(toastId.current, response.data.message);
     }
   };
 
   const deleteApplication = async (applicationId) => {
     try {
+      toastId.current = showToast.loading("Deleting application...");
+
       const response = await axios.delete(
         `https://jobflow-8bka.onrender.com/applications/delete/${applicationId}`,
       );
 
       const deletedApplication = response.data.deletedApplication;
 
-      console.log(response.data);
       setApplications((currentApplications) =>
         currentApplications.filter(
           (application) => application._id !== deletedApplication._id,
         ),
       );
+
+      showToast.success(toastId.current, response.data.message);
     } catch (error) {
       console.log("Failed to delete application.", error);
+      showToast.error(toastId.current, response.data.message);
     }
   };
 
   const updateApplication = async (applicationId, updates) => {
+    toastId.current = showToast.loading("Updating application...");
+
     try {
       const response = await axios.put(
         `https://jobflow-8bka.onrender.com/applications/update/${applicationId}`,
@@ -69,8 +82,11 @@ const ApplicationProvider = ({ children }) => {
             : application,
         ),
       );
+
+      showToast.success(toastId.current, response.data.message);
     } catch (error) {
       console.error("Failed to update application:", error);
+      showToast.error(toastId.current, response.data.message);
     }
   };
 

@@ -91,19 +91,14 @@ const Applications = () => {
     setIsModalOpen(true);
   };
 
-  const handleModalClose = () => {
-    setIsModalOpen(false);
-    setEditingApplication(null);
-  };
-
   const handleApplicationSubmit = (formData) => {
     if (editingApplication) {
       updateApplication(editingApplication._id, formData);
+      setEditingApplication(null);
+      setIsModalOpen(false);
     } else {
       addApplication(formData);
     }
-
-    handleModalClose();
   };
 
   return (
@@ -159,7 +154,7 @@ const Applications = () => {
       <ApplicationModal
         isOpen={isModalOpen}
         application={selectedApplication}
-        onClose={handleModalClose}
+        onClose={() => setIsModalOpen(false)}
         onSubmit={handleApplicationSubmit}
       />
     </section>
