@@ -12,7 +12,7 @@ const ApplicationDetailsDrawer = ({
   }
 
   return (
-    <div className="fixed inset-0 z-50 border-2">
+    <div className="fixed inset-0 z-50">
       {/* Backdrop */}
 
       <button

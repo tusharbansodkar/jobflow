@@ -57,7 +57,10 @@ const deleteApplication = async (req, res) => {
 
     const deletedApplication = await Application.findByIdAndDelete(id);
 
-    res.json({ message: "Application deleted successfully." });
+    res.json({
+      message: "Application deleted successfully.",
+      deletedApplication,
+    });
   } catch (error) {
     res.status(500).json({ message: "Server error", error: error.message });
   }
@@ -66,8 +69,6 @@ const deleteApplication = async (req, res) => {
 const updateApplication = async (req, res) => {
   try {
     const id = req.params.id;
-
-    console.log(req.body);
 
     const application = await Application.findById(id);
 
