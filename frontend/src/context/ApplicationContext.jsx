@@ -32,15 +32,6 @@ const ApplicationProvider = ({ children }) => {
     } catch (error) {
       console.log("Failed to update application", error);
     }
-
-    // const newApplication = {
-    //   id: crypto.randomUUID(),
-    //   ...applicationData,
-    // };
-    // setApplications((currentApplications) => [
-    //   newApplication,
-    //   ...currentApplications,
-    // ]);
   };
 
   const deleteApplication = (applicationId) => {
