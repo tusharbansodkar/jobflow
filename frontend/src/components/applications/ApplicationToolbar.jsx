@@ -50,7 +50,12 @@ const ApplicationToolbar = ({
           <button
             type="button"
             className="inline-flex items-center h-9 gap-2 rounded-md border border-border-strong bg-surface px-3 text-sm font-medium text-text-secondary transition hover:bg-surface-subtle hover:text-text-primary cursor-pointer"
-            onClick={() => setIsFilterOpen((prev) => !prev)}
+            onClick={() =>
+              setIsFilterOpen((prev) => {
+                setIsSortOpen(false);
+                return !prev;
+              })
+            }
           >
             <Filter className="size-4" />
             <span>Filter</span>
@@ -101,7 +106,12 @@ const ApplicationToolbar = ({
           <button
             type="button"
             className="inline-flex items-center h-9 gap-2 rounded-md border border-border-strong bg-surface px-3 text-sm font-medium text-text-secondary transition hover:bg-surface-subtle hover:text-text-primary cursor-pointer"
-            onClick={() => setIsSortOpen((prev) => !prev)}
+            onClick={() =>
+              setIsSortOpen((prev) => {
+                setIsFilterOpen(false);
+                return !prev;
+              })
+            }
           >
             <ArrowDownUp className="size-4" />
             <span>Sort</span>

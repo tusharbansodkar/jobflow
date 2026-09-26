@@ -122,7 +122,7 @@ const Applications = () => {
         onSortChange={setSortOption}
       />
 
-      {applications.length > 0 && filteredApplications.length === 0 ? (
+      {applications.length >= 0 && filteredApplications.length === 0 ? (
         <div className="flex min-h-64 items-center justify-center rounded-lg border border-border bg-surface">
           <div className="text-center">
             <p className="text-sm font-medium text-text-primary">
@@ -130,7 +130,9 @@ const Applications = () => {
             </p>
 
             <p className="mt-1 text-sm text-text-muted">
-              Try a different search term.
+              {applications.length === 0
+                ? "Add application and start tracking."
+                : "Try a different search term."}
             </p>
           </div>
         </div>
