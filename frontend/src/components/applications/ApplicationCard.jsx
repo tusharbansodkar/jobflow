@@ -3,9 +3,14 @@ import { useDraggable } from "@dnd-kit/core";
 
 const ApplicationCard = ({ application, onClick }) => {
   const { company, position, location, jobUrl, applicationDate } = application;
+  const dateString = new Date(applicationDate);
+  const formatter = new Intl.DateTimeFormat("en-IN", {
+    dateStyle: "medium",
+    timeStyle: "short",
+  }).format(dateString);
 
   const { attributes, setNodeRef, listeners, transform, isDragging } =
-    useDraggable({ id: application.id });
+    useDraggable({ id: application._id });
 
   const style = transform
     ? {
@@ -59,7 +64,7 @@ const ApplicationCard = ({ application, onClick }) => {
 
         <div className="flex items-center gap-2 text-text-muted text-xs">
           <CalendarDays className="size-3.5" />
-          <span>{applicationDate}</span>
+          <span>{formatter.split(",")[0]}</span>
         </div>
       </div>
     </article>
