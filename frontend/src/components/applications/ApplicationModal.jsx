@@ -23,7 +23,7 @@ const ApplicationModal = ({ isOpen, application, onClose, onSubmit }) => {
         position: application.position || "",
         location: application.location || "",
         jobUrl: application.jobUrl || "",
-        applicationDate: application.applicationDate || "",
+        applicationDate: application.applicationDate.split("T")[0] || "",
         status: application.status || "applied",
         notes: application.notes || "",
       });
