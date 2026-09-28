@@ -4,6 +4,7 @@ import KanbanBoard from "../components/applications/KanbanBoard";
 import ApplicationDetailsDrawer from "../components/applications/ApplicationDetailsDrawer";
 import ApplicationModal from "../components/applications/ApplicationModal";
 import useApplications from "../hooks/useApplications";
+import Loader from "../components/layout/Loader";
 
 const Applications = () => {
   const {
@@ -14,6 +15,7 @@ const Applications = () => {
     updateApplicationStatus,
     isModalOpen,
     setIsModalOpen,
+    isLoading,
   } = useApplications();
 
   const [selectedApplicationId, setSelectedApplicationId] = useState(null);
@@ -100,6 +102,10 @@ const Applications = () => {
       addApplication(formData);
     }
   };
+
+  if (isLoading) {
+    return <Loader />;
+  }
 
   return (
     <section className="space-y-6 p-3">

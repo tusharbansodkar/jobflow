@@ -2,10 +2,11 @@ import ApplicationPipeline from "../components/dashboard/ApplicationPipeline";
 import JobSearchInsights from "../components/dashboard/JobSearchInsights";
 import RecentApplications from "../components/dashboard/RecentApplications";
 import StatCard from "../components/dashboard/statCard";
+import Loader from "../components/layout/Loader";
 import useApplications from "../hooks/useApplications";
 
 const Dashboard = () => {
-  const { applications } = useApplications();
+  const { applications, isLoading } = useApplications();
 
   const totalApplications = applications.length;
 
@@ -21,6 +22,10 @@ const Dashboard = () => {
   const offerCount = applications.filter(
     (application) => application.status === "offer",
   ).length;
+
+  if (isLoading) {
+    return <Loader />;
+  }
 
   return (
     <section className="p-3 space-y-6">
