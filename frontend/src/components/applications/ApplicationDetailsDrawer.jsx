@@ -17,7 +17,7 @@ const ApplicationDetailsDrawer = ({
     }).format(dateString);
 
     return (
-      <div className="fixed inset-0 z-50">
+      <div className="fixed inset-0 h-full z-50">
         {/* Backdrop */}
 
         <button
@@ -30,7 +30,7 @@ const ApplicationDetailsDrawer = ({
         {/* Drawer */}
 
         <aside
-          className=" absolute inset-y-0 right-0 flex w-full max-w-md flex-col border-l border-border-strong bg-surface shadow-modal"
+          className="absolute inset-y-0 right-0 flex w-full max-w-md flex-col border-l border-border-strong bg-surface shadow-modal"
           aria-label="Application details"
         >
           {/* Header */}

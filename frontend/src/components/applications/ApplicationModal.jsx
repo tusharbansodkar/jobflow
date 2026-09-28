@@ -41,6 +41,11 @@ const ApplicationModal = ({ isOpen, application, onClose, onSubmit }) => {
     }));
   };
 
+  const handleClose = () => {
+    onClose(false);
+    setFormData(EMPTY_FORM);
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
     onSubmit(formData);
@@ -63,15 +68,12 @@ const ApplicationModal = ({ isOpen, application, onClose, onSubmit }) => {
       <button
         className="absolute inset-0 bg-black/30 "
         aria-label="Close Modal"
-        onClick={() => {
-          onClose(false);
-          setFormData(EMPTY_FORM);
-        }}
+        onClick={handleClose}
       ></button>
 
       {/* Modal */}
 
-      <div className="relative my-auto w-full max-w-xl ">
+      <div className="relative my-auto w-full max-w-xl">
         <div className="max-h-[calc(100vh-2rem)] overflow-y-auto rounded-xl border border-border bg-surface shadow-xl sm:max-h-[calc(100vh-3rem)] custom-scrollbar">
           {/* Header */}
           <div className="flex justify-between items-center border-b border-border-strong px-6 py-4">
@@ -91,7 +93,7 @@ const ApplicationModal = ({ isOpen, application, onClose, onSubmit }) => {
 
             <button
               className="p-2 rounded-md text-text-muted transition hover:bg-surface-subtle hover:text-text-primary cursor-pointer"
-              onClick={onClose}
+              onClick={handleClose}
             >
               <X className="size-4" />
             </button>
@@ -256,7 +258,7 @@ const ApplicationModal = ({ isOpen, application, onClose, onSubmit }) => {
             <div className="flex justify-end gap-3 border-t border-border-strong px-6 py-4">
               <button
                 type="button"
-                onClick={onClose}
+                onClick={handleClose}
                 className="rounded-md border border-border px-4 py-2 text-sm font-medium text-text-secondary transition hover:bg-surface-subtle hover:text-text-primary cursor-pointer"
               >
                 Cancel
