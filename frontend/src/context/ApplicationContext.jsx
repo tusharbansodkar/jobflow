@@ -8,6 +8,7 @@ const ApplicationProvider = ({ children }) => {
   const [applications, setApplications] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const toastId = useRef(null);
 
   useEffect(() => {
@@ -15,8 +16,12 @@ const ApplicationProvider = ({ children }) => {
       .get("https://jobflow-8bka.onrender.com/applications")
       .then((response) => {
         setApplications(response.data.applications);
+        setIsLoading(false);
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        console.log("Failed to update application.", error);
+        setIsLoading(false);
+      });
   }, []);
 
   const addApplication = async (applicationData) => {
@@ -110,6 +115,7 @@ const ApplicationProvider = ({ children }) => {
     setIsModalOpen,
     isSidebarOpen,
     toggleSidebar,
+    isLoading,
   };
 
   return (

@@ -49,7 +49,7 @@ const RecentApplications = ({ applications }) => {
 
       <div className="divide-y divide-border">
         {recentApplications.map((application) => (
-          <div key={application.id} className="px-5 py-4">
+          <div key={application._id} className="px-5 py-4">
             <div className="flex items-start justify-between gap-4">
               <div className="min-w-0">
                 <p className="truncate text-sm font-semibold text-text-primary">
