@@ -37,7 +37,7 @@ const KanbanColumn = ({ status, applications, onApplicationClick, onAdd }) => {
       <div className="min-h-24 space-y-3">
         {applications.map((application) => (
           <ApplicationCard
-            key={application.id}
+            key={application._id}
             application={application}
             onClick={() => onApplicationClick(application)}
           />
